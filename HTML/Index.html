@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>JenkinsPlatform</title>
+    <link rel="stylesheet" href="../CSS/Main.css" type="text/css">
+    <script type="text/javascript" src="../JS/jquery-3.1.1.js"></script>
+    <script src="../JS/jquery.tmpl.min.js"></script>
+</head>
+<body>
+
+    <!--Head-->
+    <div class="IndexHead">
+        <h1>JenkinsPlatform</h1>
+    </div>
+    <!--Head结束-->
+
+    <div class="ItemBox" style="overflow: hidden">
+
+    </div>
+
+    <div style="height: 20px;width: 100%;color: white">
+        <span> </span>
+    </div>
+
+</body>
+
+
+
+<script id="itemTmpl" type="x-jquery-tmpl">
+	<div class="ItemCard">
+        <img src=${appQRCodeURL} alt="" class="QcodeIcon">
+        <div class="Version">
+            <span>Version:</span>
+            <span>${appVersion}</span>
+        </div>
+        <div class="Version">
+            <span>Build:</span>
+            <span>${appBuildVersion}</span>
+        </div>
+        <div class="CreateTimer">
+            <span>Time:</span>
+            <span>${appUpdated}</span>
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $.getJSON("data.php",{},
+            function (result) {
+                for (var i = 0;i<result['data'].length;i++) {
+                    $('#itemTmpl').tmpl(result['data'][i]).appendTo('.ItemBox');
+                }
+            }
+        );
+
+    })
+
+</script>
+
+
+
+</html>
